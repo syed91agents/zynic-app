@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zynic</title>
+    <!-- Google Fonts for modern premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for clean iconography -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Animated Background Glow Blobs -->
+        <div class="bg-glow-blob blob-1"></div>
+        <div class="bg-glow-blob blob-2"></div>
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fa-solid fa-circle-play logo-icon"></i>
+                <span class="logo-text">Zynic</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="nav-item active" data-tab="home" id="nav-home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </li>
+                <li class="nav-item" data-tab="explore" id="nav-explore">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Explore</span>
+                </li>
+                <li class="nav-item" data-tab="charts" id="nav-charts">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>Charts</span>
+                </li>
+                <li class="nav-item" data-tab="search" id="nav-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Search</span>
+                </li>
+                <li class="nav-item" data-tab="library" id="nav-library">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <span>Library</span>
+                </li>
+                <li class="nav-item" data-tab="pet-den" id="nav-pet-den">
+                    <i class="fa-solid fa-paw"></i>
+                    <span>Pet Den</span>
+                </li>
+                <li class="nav-item" data-tab="equalizer" id="nav-equalizer">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Equalizer</span>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary sync-btn" id="sidebar-settings-btn" style="margin-top: 8px;">
+                    <i class="fa-solid fa-palette"></i> Theme & Settings
+                </button>
+                <small>© 2026 Zynic</small>
+            </div>
+        </nav>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+            <ul>
+                <li class="nav-item active" data-tab="home"><i class="fa-solid fa-house"></i><span>Home</span></li>
+                <li class="nav-item" data-tab="search"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></li>
+                <li class="nav-item" data-tab="explore"><i class="fa-solid fa-compass"></i><span>Explore</span></li>
+                <li class="nav-item" data-tab="library"><i class="fa-solid fa-bookmark"></i><span>Library</span></li>
+                <li class="nav-item" data-tab="charts"><i class="fa-solid fa-fire"></i><span>Charts</span></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header with page navigation and profile info -->
+            <header class="app-header">
+                <div class="header-left">
+                    <button class="nav-btn" id="header-back-btn" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="nav-btn" id="header-forward-btn" title="Forward"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="header-right">
+                    <div class="user-badge" id="header-user-badge">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span id="user-status-text">Guest Mode</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Views -->
+            <div class="view-container">
+                <!-- Home View -->
+                <section id="view-home" class="view-section active">
+                    <div class="hero-banner">
+                        <div class="hero-content">
+                            <span class="hero-badge">Dynamic Stream</span>
+                            <h1>Welcome to Zynic</h1>
+                            <p>Seamlessly browse charts, explore genres, or sync your account for library access.</p>
+                        <div class="hero-buttons">
+                                <button class="btn btn-primary" id="hero-listen-btn">Start Searching</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wrapped 2026 Year-in-Review Banner -->
+                    <div class="wrapped-banner" id="home-wrapped-banner">
+                        <div class="wrapped-banner-content">
+                            <span class="wrapped-badge"><i class="fa-solid fa-gift"></i> 2026 RECAP</span>
+                            <h2>Your Year in Music is Ready!</h2>
+                            <p>Relive your top songs, favorite artists, and discover your musical vibe from the past year.</p>
+                            <button class="btn btn-primary btn-wrapped" id="home-wrapped-btn">
+                                <i class="fa-solid fa-sparkles"></i> Open Your Wrapped
+                            </button>
+                        </div>
+                        <div class="wrapped-banner-visual">
+                            <div class="rotating-vinyl">
+                                <div class="vinyl-disc"></div>
+                                <div class="vinyl-center"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Home Shelves populated from API -->
+                    <div id="home-shelves" class="shelves-wrapper">
+                        <div class="shelf-placeholder">
+                            <div class="skeleton-title"></div>
+                            <div class="music-grid">
+                                <div class="skeleton-card"></div>
+                                <div class="skeleton-card"></div>
+                                <div class="skeleton-card"></div>
+                                <div class="skeleton-card"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Explore View -->
+                <section id="view-explore" class="view-section">
+                    <div class="explore-header">
+                        <h1>Explore</h1>
+                    </div>
+                    
+                    <div class="shelf-section">
+                        <h2>New Releases</h2>
+                        <div class="music-grid" id="explore-new-releases">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="shelf-section">
+                        <h2>Moods & Genres</h2>
+                        <div class="genres-grid" id="explore-genres">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts View -->
+                <section id="view-charts" class="view-section">
+                    <div class="charts-header">
+                        <h1>Charts</h1>
+                        <p>Popular songs, music videos, and trending albums globally.</p>
+                    </div>
+
+                    <div id="charts-shelves" class="shelves-wrapper">
+                        <!-- Populated dynamically -->
+                    </div>
+                </section>
+
+                <!-- Search View -->
+                <section id="view-search" class="view-section">
+                    <div class="search-bar-container">
+                        <div class="search-input-wrapper">
+                            <i class="fa-solid fa-magnifying-glass search-input-icon"></i>
+                            <input type="text" id="search-input" placeholder="Search songs, artists, albums, or playlists..." autocomplete="off">
+                            <button id="search-clear-btn" class="search-clear" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        
+                        <!-- Suggestion Dropdown -->
+                        <div id="suggestions-box" class="suggestions-dropdown" style="display:none;"></div>
+                    </div>
+
+                    <!-- Search Loading Indicator -->
+                    <div id="search-loader" class="loader-container" style="display:none;">
+                        <div class="music-bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <p>Searching database...</p>
+                    </div>
+
+                    <!-- Search Results Grid -->
+                    <div id="search-results-wrapper" style="display:none;">
+                        <!-- Top Result Card -->
+                        <div class="top-result-container" id="top-result-box" style="display:none;">
+                            <h2>Top Result</h2>
+                            <div class="top-result-card" id="top-result-card">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Results Categorized -->
+                        <div class="results-categorized">
+                            <div class="results-category-section" id="cat-songs-box">
+                                <h2>Songs</h2>
+                                <div class="list-container" id="cat-songs-list"></div>
+                            </div>
+                            <div class="results-category-section" id="cat-albums-box">
+                                <h2>Albums</h2>
+                                <div class="grid-container" id="cat-albums-grid"></div>
+                            </div>
+                            <div class="results-category-section" id="cat-artists-box">
+                                <h2>Artists</h2>
+                                <div class="grid-container" id="cat-artists-grid"></div>
+                            </div>
+                            <div class="results-category-section" id="cat-playlists-box">
+                                <h2>Playlists</h2>
+                                <div class="grid-container" id="cat-playlists-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Initial State Message -->
+                    <div id="search-empty-state" class="empty-state">
+                        <i class="fa-solid fa-music"></i>
+                        <h3>Discover New Sounds</h3>
+                        <p>Type a search query to search millions of tracks.</p>
+                    </div>
+                </section>
+
+                <!-- Library View -->
+                <section id="view-library" class="view-section">
+                    <div class="library-header">
+                        <h1>Your Library</h1>
+                        <div class="library-tabs">
+                            <button class="lib-tab active" data-lib-tab="favorites">Liked Songs</button>
+                            <button class="lib-tab" data-lib-tab="playlists">Playlists</button>
+                            <button class="lib-tab" data-lib-tab="recent">Recently Played</button>
+                        </div>
+                    </div>
+
+                    <div id="library-favorites" class="lib-tab-content active">
+                        <div class="list-container" id="liked-songs-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                        <div class="empty-state" id="liked-songs-empty" style="display:none;">
+                            <i class="fa-solid fa-heart-broken"></i>
+                            <h3>No Liked Songs Yet</h3>
+                            <p>Songs you like will appear here for quick access.</p>
+                        </div>
+                    </div>
+
+                    <div id="library-playlists" class="lib-tab-content">
+                        <div class="library-actions-bar" style="margin-bottom: 20px; display: flex; justify-content: flex-end;">
+                            <button class="btn btn-primary btn-sm" id="lib-btn-create-playlist">
+                                <i class="fa-solid fa-plus"></i> Create Playlist
+                            </button>
+                        </div>
+                        <div class="grid-container" id="user-playlists-grid">
+                            <!-- Populated dynamically -->
+                        </div>
+                        <div class="empty-state" id="user-playlists-empty" style="display:none;">
+                            <i class="fa-solid fa-music"></i>
+                            <h3>No Playlists Yet</h3>
+                            <p>Create a custom playlist to group your favorite songs.</p>
+                            <button class="btn btn-primary" id="lib-btn-create-playlist-empty">Create Playlist</button>
+                        </div>
+                    </div>
+
+                    <div id="library-recent" class="lib-tab-content">
+                        <div class="list-container" id="recent-songs-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                        <div class="empty-state" id="recent-songs-empty" style="display:none;">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <h3>History is Empty</h3>
+                            <p>Keep listening! Your recently played tracks will be saved here.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pet Den View -->
+                <section id="view-pet-den" class="view-section">
+                    <div class="den-header">
+                        <h1>Pet Den</h1>
+                        <button class="btn btn-secondary" id="den-btn-picker">
+                            <i class="fa-solid fa-paw"></i> Select Pet
+                        </button>
+                    </div>
+
+                    <div id="den-no-pet-state" class="empty-state">
+                        <div class="empty-state-icon">🐾</div>
+                        <h3>You don't have a pet yet!</h3>
+                        <p>Choose your companion to start your musical journey together.</p>
+                        <button class="btn btn-primary" id="den-btn-picker-empty">Go to Pet Picker</button>
+                    </div>
+
+                    <div id="den-content" class="den-grid-layout" style="display: none;">
+                        <!-- Left Panel: Large animated pet & character card -->
+                        <div class="den-card glass-panel">
+                            <div class="den-pet-header">
+                                <h2 id="den-pet-name">Pet Name</h2>
+                                <span class="badge" id="den-days-together">Day 0 together</span>
+                            </div>
+                            
+                            <div class="den-sprite-container">
+                                <canvas id="den-sprite-canvas" width="192" height="208"></canvas>
+                                <div id="den-particle-emitter"></div>
+                            </div>
+                            
+                            <div class="den-personality-tag" id="den-personality">
+                                ✨ Playful personality
+                            </div>
+                            
+                            <p class="den-description" id="den-desc">
+                                Pet description...
+                            </p>
+                            
+                            <div class="den-actions">
+                                <button class="btn btn-primary" id="den-btn-feed">
+                                    <i class="fa-solid fa-cookie-bite"></i> Feed Pet
+                                </button>
+                                <button class="btn btn-secondary" id="den-btn-rename">
+                                    <i class="fa-solid fa-pen"></i> Rename Pet
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Statistics list -->
+                        <div class="den-stats-panel glass-panel">
+                            <h3>Pet Statistics</h3>
+                            <p class="stats-subtitle">Drives your companion's reaction behaviors</p>
+                            
+                            <div class="stat-progress-group">
+                                <div class="stat-progress-header">
+                                    <span class="stat-label"><i class="fa-solid fa-heart"></i> Vibe</span>
+                                    <span class="stat-value" id="stat-vibe-val">50%</span>
+                                </div>
+                                <div class="progress-bar-wrapper">
+                                    <div class="progress-fill vibe-fill" id="stat-vibe-bar" style="width: 50%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="stat-progress-group">
+                                <div class="stat-progress-header">
+                                    <span class="stat-label"><i class="fa-solid fa-bolt"></i> Energy</span>
+                                    <span class="stat-value" id="stat-energy-val">80%</span>
+                                </div>
+                                <div class="progress-bar-wrapper">
+                                    <div class="progress-fill energy-fill" id="stat-energy-bar" style="width: 80%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="stat-progress-group">
+                                <div class="stat-progress-header">
+                                    <span class="stat-label"><i class="fa-solid fa-music"></i> Groove</span>
+                                    <span class="stat-value" id="stat-groove-val">50%</span>
+                                </div>
+                                <div class="progress-bar-wrapper">
+                                    <div class="progress-fill groove-fill" id="stat-groove-bar" style="width: 50%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="stat-progress-group">
+                                <div class="stat-progress-header">
+                                    <span class="stat-label"><i class="fa-solid fa-dna"></i> Bond</span>
+                                    <span class="stat-value" id="stat-bond-val">0%</span>
+                                </div>
+                                <div class="progress-bar-wrapper">
+                                    <div class="progress-fill bond-fill" id="stat-bond-bar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- History metrics / totals -->
+                            <div class="den-metrics-box">
+                                <div class="metric-item">
+                                    <span class="metric-val" id="metric-minutes-val">0</span>
+                                    <span class="metric-lbl">Listening Min</span>
+                                </div>
+                                <div class="metric-divider"></div>
+                                <div class="metric-item">
+                                    <span class="metric-val" id="metric-days-val">1</span>
+                                    <span class="metric-lbl">Days Side-by-Side</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pet Picker View -->
+                <section id="view-pet-picker" class="view-section">
+                    <div class="picker-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+                        <div>
+                            <h1>Petdex Gallery</h1>
+                            <p>Select a companion to share your musical vibe</p>
+                        </div>
+                        <button class="btn btn-primary" id="picker-btn-custom-import">
+                            <i class="fa-solid fa-plus"></i> Import Custom Pet
+                        </button>
+                    </div>
+
+                    <!-- Category tabs for companions -->
+                    <div class="library-tabs" style="margin-bottom: 24px; display: flex; gap: 8px;">
+                        <button class="lib-tab active" data-filter="all" id="tab-pets-all">All Companions</button>
+                        <button class="lib-tab" data-filter="built-in" id="tab-pets-built">Built-in</button>
+                        <button class="lib-tab" data-filter="custom" id="tab-pets-custom">My Custom Pets</button>
+                        <button class="lib-tab" data-filter="petdex" id="tab-pets-petdex">Petdex Registry 🐾</button>
+                    </div>
+
+                    <!-- Search & filter bar for Petdex -->
+                    <div class="pet-search-bar-container" style="margin-bottom: 24px; display: none;" id="pet-gallery-search-container">
+                        <div class="search-input-wrapper" style="max-width: 100%;">
+                            <i class="fa-solid fa-magnifying-glass search-input-icon"></i>
+                            <input type="text" id="pet-gallery-search-input" placeholder="Search 2,500+ Petdex companions by name..." autocomplete="off" style="width: 100%; padding: 12px 12px 12px 48px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.03); color: var(--text-primary);">
+                        </div>
+                    </div>
+
+                    <!-- Petdex loading indicator -->
+                    <div id="pet-gallery-loader" class="loader-container" style="display:none; padding: 48px 0; text-align: center;">
+                        <div class="music-bars" style="margin: 0 auto 16px auto;">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-weight: 500;">Loading Petdex Registry from Server...</p>
+                    </div>
+
+                    <div class="pet-picker-grid" id="picker-pets-container">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </section>
+
+                <!-- Equalizer View -->
+                <section id="view-equalizer" class="view-section">
+                    <div class="eq-header">
+                        <h1>Parametric Equalizer</h1>
+                        <p>Audiophile-grade 10-band parametric EQ. Drag interactive nodes directly on the graph or adjust controls below.</p>
+                    </div>
+                    <div class="eq-container glass-panel">
+                        <!-- Graph visualizer -->
+                        <div class="eq-visualizer-container">
+                            <canvas id="eq-graph-canvas" width="760" height="300" style="width: 100%; height: 300px; display: block; cursor: crosshair;"></canvas>
+                        </div>
+                        
+                        <div class="eq-global-actions">
+                            <div class="eq-action-buttons">
+                                <button class="btn btn-primary btn-sm" id="eq-add-band-btn">
+                                    <i class="fa-solid fa-plus"></i> Add Band
+                                </button>
+                                <button class="btn btn-secondary btn-sm" id="eq-reset-btn">
+                                    <i class="fa-solid fa-arrows-rotate"></i> Reset All
+                                </button>
+                            </div>
+                            
+                            <!-- EQ Presets -->
+                            <div class="eq-presets">
+                                <span class="presets-label">Presets:</span>
+                                <div class="presets-grid">
+                                    <button class="btn-eq-preset active" data-preset="flat">Flat</button>
+                                    <button class="btn-eq-preset" data-preset="bass-boost">Bass Boost</button>
+                                    <button class="btn-eq-preset" data-preset="treble-boost">Treble Boost</button>
+                                    <button class="btn-eq-preset" data-preset="vocal-boost">Vocal Boost</button>
+                                    <button class="btn-eq-preset" data-preset="electronic">Electronic</button>
+                                    <button class="btn-eq-preset" data-preset="rock">Rock</button>
+                                    <button class="btn-eq-preset" data-preset="pop">Pop</button>
+                                    <button class="btn-eq-preset" data-preset="acoustic">Acoustic</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Parametric Bands Control List -->
+                        <div class="eq-bands-wrapper">
+                            <div class="eq-bands-header">
+                                <span class="col-band">Band</span>
+                                <span class="col-type">Type</span>
+                                <span class="col-freq">Frequency</span>
+                                <span class="col-q">Q (Bandwidth)</span>
+                                <span class="col-gain">Gain</span>
+                                <span class="col-status">Status</span>
+                                <span class="col-actions">Actions</span>
+                            </div>
+                            <div class="eq-bands-list" id="eq-bands-container">
+                                <!-- Dynamically populated via app.js -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Music Stats View -->
+                <section id="view-stats" class="view-section">
+                    <div class="stats-header">
+                        <h1>Music Listening Stats</h1>
+                        <p>Insights and analytics from your listening sessions</p>
+                    </div>
+                    <div class="stats-overview-grid">
+                        <div class="stat-metric-card glass-panel">
+                            <i class="fa-solid fa-clock metric-icon"></i>
+                            <div class="metric-info">
+                                <span class="metric-title" id="stats-total-minutes">0</span>
+                                <span class="metric-subtitle">Listening Minutes</span>
+                            </div>
+                        </div>
+                        <div class="stat-metric-card glass-panel">
+                            <i class="fa-solid fa-music metric-icon"></i>
+                            <div class="metric-info">
+                                <span class="metric-title" id="stats-unique-songs">0</span>
+                                <span class="metric-subtitle">Unique Songs</span>
+                            </div>
+                        </div>
+                        <div class="stat-metric-card glass-panel">
+                            <i class="fa-solid fa-microphone-lines metric-icon"></i>
+                            <div class="metric-info">
+                                <span class="metric-title" id="stats-unique-artists">0</span>
+                                <span class="metric-subtitle">Unique Artists</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-charts-row">
+                        <!-- Top Tracks Chart -->
+                        <div class="chart-container glass-panel">
+                            <h3>Top Tracks</h3>
+                            <div class="stats-bar-list" id="stats-top-tracks-list">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+                        <!-- Top Artists Chart -->
+                        <div class="chart-container glass-panel">
+                            <h3>Top Artists</h3>
+                            <div class="stats-bar-list" id="stats-top-artists-list">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-charts-row">
+                        <!-- Genre Breakdown -->
+                        <div class="chart-container glass-panel">
+                            <h3>Genre Breakdown</h3>
+                            <div class="genres-progress-list" id="stats-genres-list">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+                        <!-- Listening Heatmap -->
+                        <div class="chart-container glass-panel">
+                            <h3>Hourly Listening Pattern</h3>
+                            <p class="chart-subtitle" style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Your active hours throughout the day</p>
+                            <div class="heatmap-grid" id="stats-heatmap-grid">
+                                <!-- 24 blocks rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Song Finder View -->
+                <section id="view-recognition" class="view-section">
+                    <div class="rec-header">
+                        <h1>Song Finder</h1>
+                        <p>Identify songs playing around you using your microphone</p>
+                    </div>
+                    
+                    <div class="rec-box glass-panel" id="rec-container">
+                        <!-- Ready State -->
+                        <div class="rec-state active" id="rec-state-ready">
+                            <div class="rec-mic-btn" id="rec-btn-start">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                            <h3>Tap to Identify Song</h3>
+                            <p>Make sure music is playing clearly nearby.</p>
+                        </div>
+                        
+                        <!-- Listening State -->
+                        <div class="rec-state" id="rec-state-listening" style="display:none;">
+                            <div class="rec-visualizer-box">
+                                <canvas id="rec-mic-canvas" width="200" height="200"></canvas>
+                                <div class="rec-mic-pulse"></div>
+                                <div class="rec-mic-pulse-outer"></div>
+                            </div>
+                            <h3 class="text-glow">Listening to your environment...</h3>
+                            <p>Keep your device close to the audio source.</p>
+                            <button class="btn btn-secondary" id="rec-btn-cancel">Cancel</button>
+                        </div>
+                        
+                        <!-- Processing State -->
+                        <div class="rec-state" id="rec-state-processing" style="display:none;">
+                            <div class="rec-processing-box">
+                                <div class="rec-spinner">
+                                    <div class="rec-spinner-inner"></div>
+                                </div>
+                                <i class="fa-solid fa-music note-pulse"></i>
+                            </div>
+                            <h3>Analyzing Audio Signature...</h3>
+                            <p>Comparing details against our library.</p>
+                        </div>
+                        
+                        <!-- Success State -->
+                        <div class="rec-state" id="rec-state-success" style="display:none;">
+                            <div class="rec-result-card">
+                                <img src="" alt="Album Art" id="rec-result-art" class="rec-result-art">
+                                <div class="rec-result-info">
+                                    <h2 id="rec-result-title">Song Title</h2>
+                                    <p id="rec-result-artist" class="artist-name">Artist Name</p>
+                                    <p id="rec-result-album" class="album-name">Album Name</p>
+                                </div>
+                            </div>
+                            <div class="rec-actions">
+                                <button class="btn btn-primary" id="rec-btn-play"><i class="fa-solid fa-play"></i> Play Song</button>
+                                <button class="btn btn-outline" id="rec-btn-retry"><i class="fa-solid fa-microphone"></i> Try Again</button>
+                                <button class="btn btn-secondary" id="rec-btn-close">Close</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Error State -->
+                        <div class="rec-state" id="rec-state-error" style="display:none;">
+                            <div class="rec-error-icon">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </div>
+                            <h3 id="rec-error-title">No Match Found</h3>
+                            <p id="rec-error-message">We couldn't hear the song clearly. Please try again with the device closer to the music.</p>
+                            <button class="btn btn-primary" id="rec-btn-error-retry"><i class="fa-solid fa-rotate-right"></i> Try Again</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Song Recognition History -->
+                    <div class="rec-history-container glass-panel">
+                        <h3>Recognition History</h3>
+                        <div class="music-row-list" id="rec-history-list">
+                            <!-- Dynamically populated -->
+                        </div>
+                        <div class="empty-state" id="rec-history-empty">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <h3>History is Empty</h3>
+                            <p>Identified songs will appear here.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Detail View (Popup Overlay / Page for Artists, Albums, Playlists) -->
+                <section id="view-detail" class="view-section detail-view">
+                    <div class="detail-backdrop" id="detail-backdrop"></div>
+                    <div class="detail-header-card">
+                        <div class="detail-art-wrapper">
+                            <img src="" alt="Cover Art" id="detail-cover-art">
+                        </div>
+                        <div class="detail-meta">
+                            <span class="detail-type" id="detail-type">PLAYLIST</span>
+                            <h1 id="detail-title">Playlist Title</h1>
+                            <p id="detail-subtitle">By Creator • 0 songs</p>
+                            <p class="detail-desc" id="detail-description"></p>
+                            <div class="detail-actions">
+                                <button class="btn btn-primary" id="detail-btn-play"><i class="fa-solid fa-play"></i> Play</button>
+                                <button class="btn btn-secondary" id="detail-btn-shuffle"><i class="fa-solid fa-shuffle"></i> Shuffle</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-content-area">
+                        <!-- Detail Tracks Shelf -->
+                        <div class="detail-tracks-container" id="detail-tracks-container">
+                            <div class="list-container" id="detail-tracks-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Detail Shelves (Used for Artist Pages: Top Songs, Albums, Singles, Playlists) -->
+                        <div class="detail-shelves-container" id="detail-shelves-container" style="display:none;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Right Sidebar (Profile, Active Companion, Visualizer, Queue) -->
+        <aside class="right-sidebar">
+            <!-- User Profile Section -->
+            <div class="rs-profile-card">
+                <div class="rs-user-badge" id="rs-user-badge-clickable" title="Edit Profile" style="cursor:pointer;">
+                    <div class="rs-user-avatar" id="rs-user-avatar-wrap">
+                        <div class="rs-avatar-initials" id="rs-avatar-initials">G</div>
+                        <img src="" alt="User Avatar" id="rs-user-avatar-img" style="display:none;">
+                        <div class="rs-avatar-edit-hint"><i class="fa-solid fa-pen"></i></div>
+                    </div>
+                    <div class="rs-user-info">
+                        <div class="rs-user-name-row">
+                            <span class="rs-user-name" id="rs-user-name-text">Guest</span>
+                            <span class="rs-premium-crown" id="rs-premium-crown" style="display:none;"><i class="fa-solid fa-crown"></i></span>
+                        </div>
+                        <span class="rs-user-sub" id="rs-user-sub-text">Listening as Guest</span>
+                    </div>
+                </div>
+                <div class="rs-profile-actions">
+                    <button class="rs-action-btn" id="rs-btn-notifications" title="Notifications"><i class="fa-regular fa-bell"></i></button>
+                    <button class="rs-action-btn" id="rs-btn-settings-quick" title="Quick Theme Settings"><i class="fa-solid fa-sliders"></i></button>
+                </div>
+            </div>
+
+            <!-- Companion Card -->
+            <div class="rs-companion-card glass-panel" id="rs-companion-container">
+                <div class="rs-card-header">
+                    <div class="rs-header-title">
+                        <i class="fa-solid fa-paw icon-accent"></i>
+                        <span>Active Companion</span>
+                    </div>
+                    <span class="rs-status-badge" id="rs-companion-status">Listening</span>
+                </div>
+                <div class="rs-companion-canvas-container">
+                    <canvas id="rs-companion-canvas" width="192" height="208"></canvas>
+                </div>
+                <div class="rs-companion-meta">
+                    <div class="rs-companion-name" id="rs-companion-name-text">No Companion</div>
+                    <p class="rs-companion-desc" id="rs-companion-desc-text">Select a pet from the Pet Den to watch them react to your tracks!</p>
+                </div>
+                <!-- Companion mini stats -->
+                <div class="rs-companion-stats">
+                    <div class="rs-stat-mini">
+                        <span class="rs-stat-lbl">Vibe</span>
+                        <div class="rs-mini-bar"><div class="rs-mini-bar-fill vibe-fill" id="rs-mini-vibe" style="width: 50%;"></div></div>
+                    </div>
+                    <div class="rs-stat-mini">
+                        <span class="rs-stat-lbl">Energy</span>
+                        <div class="rs-mini-bar"><div class="rs-mini-bar-fill energy-fill" id="rs-mini-energy" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Audio Visualizer Card -->
+            <div class="rs-visualizer-card glass-panel">
+                <div class="rs-card-header">
+                    <div class="rs-header-title">
+                        <i class="fa-solid fa-chart-simple icon-accent"></i>
+                        <span>Live Spectrum</span>
+                    </div>
+                    <span class="rs-status-badge live">Live</span>
+                </div>
+                <div class="rs-canvas-container">
+                    <canvas id="rs-bars-visualizer" style="width: 100%; height: 60px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Up Next Queue Card -->
+            <div class="rs-queue-card glass-panel">
+                <div class="rs-card-header">
+                    <div class="rs-header-title">
+                        <i class="fa-solid fa-list-ul icon-accent"></i>
+                        <span>Up Next</span>
+                    </div>
+                    <span class="rs-queue-count" id="rs-queue-count">0 tracks</span>
+                </div>
+                <div class="rs-queue-list-wrapper" id="rs-queue-list-wrapper">
+                    <div class="rs-queue-list" id="rs-queue-container">
+                        <!-- Populated dynamically via app.js -->
+                        <div class="rs-queue-empty">Queue is empty</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+
+        <!-- Floating Mini Player -->
+        <div class="mini-player" id="mini-player" style="display:none;">
+            <!-- Progress Line Container -->
+            <div class="mini-player-progress-container" id="mini-progress-container">
+                <div class="mini-player-progress" id="mini-progress-bar"></div>
+            </div>
+            
+            <div class="mini-player-left" id="mini-player-details">
+                <img src="" alt="Album Art" class="mini-thumbnail" id="mini-art" fetchpriority="high">
+                <div class="mini-meta">
+                    <div class="mini-title-wrapper">
+                        <span class="mini-title" id="mini-title">Track Name</span>
+                    </div>
+                    <span class="mini-artist" id="mini-artist">Artist Name</span>
+                </div>
+            </div>
+
+            <div class="mini-player-center">
+                <button class="player-control-btn btn-prev" id="mini-btn-prev" title="Previous"><i class="fa-solid fa-backward-step"></i></button>
+                <button class="player-control-btn btn-seek-back" id="mini-btn-seek-back" title="Rewind 10s"><i class="fa-solid fa-rotate-left"></i><span class="seek-label">10</span></button>
+                <button class="player-control-btn btn-play-pause" id="mini-btn-play" title="Play"><i class="fa-solid fa-play"></i></button>
+                <button class="player-control-btn btn-seek-fwd" id="mini-btn-seek-fwd" title="Forward 10s"><i class="fa-solid fa-rotate-right"></i><span class="seek-label">10</span></button>
+                <button class="player-control-btn btn-next" id="mini-btn-next" title="Next"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+
+            <div class="mini-player-right">
+                <button class="mini-action-btn" id="mini-btn-like" title="Like"><i class="fa-regular fa-heart"></i></button>
+                <button class="mini-action-btn" id="mini-btn-expand" title="Fullscreen"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+            </div>
+        </div>
+
+        <!-- Fullscreen Player Overlay -->
+        <div class="fullscreen-player" id="fullscreen-player" style="display:none;">
+            <!-- Dynamic Blur Background -->
+            <div class="fs-bg" id="fs-bg-art"></div>
+            <div class="fs-overlay"></div>
+
+            <header class="fs-header">
+                <button class="fs-close-btn" id="fs-close-btn" title="Back"><i class="fa-solid fa-chevron-down"></i></button>
+                <div class="fs-header-meta">
+                    <small>NOW PLAYING FROM</small>
+                    <span id="fs-source-title">Zynic</span>
+                </div>
+                <button class="fs-action-btn" id="fs-btn-like" title="Like"><i class="fa-regular fa-heart"></i></button>
+            </header>
+
+            <div class="fs-content">
+                <!-- Left panel: Disc, Track meta, Lyrics toggle -->
+                <div class="fs-left-panel">
+                    <div class="fs-disc-container">
+                        <!-- Retro Turntable Decoration Elements -->
+                        <div class="turntable-screw top-left"></div>
+                        <div class="turntable-screw top-right"></div>
+                        <div class="turntable-screw bottom-left"></div>
+                        <div class="turntable-screw bottom-right"></div>
+                        <div class="turntable-platter-ring"></div>
+                        <div class="turntable-power-switch" id="turntable-power-switch">
+                            <div class="switch-knob"></div>
+                        </div>
+                        <div class="turntable-speed-btn speed-33 active" id="turntable-speed-33"><span>33</span></div>
+                        <div class="turntable-speed-btn speed-45" id="turntable-speed-45"><span>45</span></div>
+                        <div class="turntable-pitch-slider-container">
+                            <div class="pitch-track"></div>
+                            <div class="pitch-handle"></div>
+                            <span class="pitch-label">PITCH</span>
+                        </div>
+                        
+                        <div class="fs-disc" id="fs-disc-art">
+                            <img src="" alt="Album Art" id="fs-art" fetchpriority="high">
+                            <div class="fs-disc-center-hole"></div>
+                        </div>
+                        <div class="fs-glow-ring" id="fs-glow-ring"></div>
+                        <!-- Retro Turntable Arm Elements -->
+                        <div class="turntable-arm-pivot" id="turntable-pivot"></div>
+                        <div class="turntable-arm" id="turntable-arm"></div>
+                        <!-- Ambient Waveform pulse rings -->
+                        <div class="ambient-waveform-ring" id="waveform-ring-1"></div>
+                        <div class="ambient-waveform-ring" id="waveform-ring-2"></div>
+                        <!-- Real-time dynamic visualizer ring -->
+                        <canvas id="fs-circular-visualizer" width="400" height="400" style="position: absolute; top: -40px; left: -40px; width: 400px; height: 400px; pointer-events: none; z-index: 10;"></canvas>
+                    </div>
+
+                    <div class="fs-track-info">
+                        <h1 id="fs-title">Track Name</h1>
+                        <p id="fs-artist">Artist Name</p>
+                        <!-- Genre pill (shown in turntable theme) -->
+                        <span id="fs-genre-pill">Classic</span>
+                        <!-- Linear spectrum visualizer -->
+                        <canvas id="fs-bars-visualizer" style="width: 100%; height: 50px; margin-top: 12px; opacity: 0.85; pointer-events: none;"></canvas>
+                    </div>
+
+                    <!-- Progress controls -->
+                    <div class="fs-progress-container">
+                        <span class="time-label" id="fs-time-current">0:00</span>
+                        <div class="fs-slider-wrapper">
+                            <canvas id="fs-squiggly-canvas"></canvas>
+                            <input type="range" class="fs-time-slider" id="fs-slider" min="0" max="100" value="0">
+                        </div>
+                        <span class="time-label" id="fs-time-total">0:00</span>
+                    </div>
+
+                    <!-- Player Core Controls -->
+                    <div class="fs-controls">
+                        <button class="fs-control-btn secondary" id="fs-btn-shuffle" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
+                        <button class="fs-control-btn primary" id="fs-btn-prev" title="Previous"><i class="fa-solid fa-backward-step"></i></button>
+                        <button class="fs-control-btn seek-btn" id="fs-btn-seek-back" title="Rewind 10s"><i class="fa-solid fa-rotate-left"></i><span class="fs-seek-label">10</span></button>
+                        <button class="fs-control-btn play-pause-main" id="fs-btn-play" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
+                        <button class="fs-control-btn seek-btn" id="fs-btn-seek-fwd" title="Forward 10s"><i class="fa-solid fa-rotate-right"></i><span class="fs-seek-label">10</span></button>
+                        <button class="fs-control-btn primary" id="fs-btn-next" title="Next"><i class="fa-solid fa-forward-step"></i></button>
+                        <button class="fs-control-btn secondary" id="fs-btn-repeat" title="Repeat"><i class="fa-solid fa-repeat"></i></button>
+                    </div>
+
+                    <!-- Volume and sub actions -->
+                    <div class="fs-sub-controls">
+                        <div class="fs-volume-container">
+                            <button id="fs-volume-icon" class="volume-btn"><i class="fa-solid fa-volume-high"></i></button>
+                            <input type="range" id="fs-volume-slider" class="fs-volume-slider" min="0" max="100" value="80">
+                        </div>
+                        <button class="tab-toggle-btn active" id="toggle-lyrics-view"><i class="fa-solid fa-align-left"></i> Lyrics</button>
+                    </div>
+                </div>
+
+                <!-- Right panel: Synced scrolling Lyrics -->
+                <div class="fs-right-panel" id="lyrics-panel">
+                    <div class="lyrics-header">
+                        <h2>Lyrics</h2>
+                        <span id="lyrics-sync-badge" class="badge">Synced</span>
+                    </div>
+                    <div class="lyrics-body-container" id="lyrics-body">
+                        <!-- Lyrics lines go here -->
+                        <div class="lyrics-placeholder">Select a song to display lyrics</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Theme & Customization Settings Modal -->
+        <div class="modal-overlay" id="settings-modal" style="display:none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Theme & Customization</h3>
+                    <button class="modal-close-btn" id="settings-modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="settings-display-name">Display Name</label>
+                        <input type="text" id="settings-display-name" placeholder="Guest" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none; font-weight: 500; font-family: inherit; transition: border-color var(--transition-fast);" onfocus="this.style.borderColor='var(--accent-light)'" onblur="this.style.borderColor='var(--border-glass)'">
+                    </div>
+                    <div class="form-group">
+                        <label>Theme Mode</label>
+                        <div class="theme-mode-options" style="display: flex; gap: 8px; width: 100%;">
+                            <button class="btn-theme-option" id="theme-btn-auto" style="flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.03); color: var(--text-secondary); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600; font-size: 13px;" title="System Auto"><i class="fa-solid fa-rotate"></i> Auto</button>
+                            <button class="btn-theme-option" id="theme-btn-dark" style="flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.03); color: var(--text-secondary); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600; font-size: 13px;" title="Dark Mode"><i class="fa-solid fa-moon"></i> Dark</button>
+                            <button class="btn-theme-option" id="theme-btn-pureblack" style="flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.03); color: var(--text-secondary); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 600; font-size: 13px;" title="OLED Pure Black"><i class="fa-solid fa-circle"></i> OLED</button>
+                        </div>
+
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="settings-dynamic-theme" checked style="width: 18px; height: 18px; cursor: pointer;">
+                            <span>Dynamic Theme (Sync with Song Colors)</span>
+                        </label>
+                        <small style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">Automatically extract and match player theme colors to the playing track's artwork.</small>
+                    </div>
+                    
+                    <div class="form-group" id="static-color-group" style="display: none;">
+                        <label>Accent Color</label>
+                        <div class="static-colors-grid" style="display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px; width: 100%;">
+                            <div class="color-dot crimson" data-color="#ec5464" style="background-color: #ec5464; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot rose" data-color="#d81b60" style="background-color: #d81b60; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot purple" data-color="#8e24aa" style="background-color: #8e24aa; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot indigo" data-color="#3949ab" style="background-color: #3949ab; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot blue" data-color="#1e88e5" style="background-color: #1e88e5; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot cyan" data-color="#00acc1" style="background-color: #00acc1; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot teal" data-color="#00897b" style="background-color: #00897b; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot green" data-color="#43a047" style="background-color: #43a047; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                            <div class="color-dot orange" data-color="#fb8c00" style="background-color: #fb8c00; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform var(--transition-fast);"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings-player-theme">Player Theme Style</label>
+                        <select id="settings-player-theme" class="select-dropdown" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none; font-weight: 500; cursor: pointer;">
+                            <option value="vinyl">Default Vinyl Disc (Spinning Record)</option>
+                            <option value="minimalist">Minimalist Cover (Soft Pulsing Color Bloom)</option>
+                            <option value="turntable">Retro Turntable (Nostalgic Board & Arm)</option>
+                            <option value="waveform">Ambient Waveform (Pulsing Voice Ring)</option>
+                        </select>
+                        <small style="font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-top: 4px; display: block;">Change the layout and animations of the Fullscreen Player view.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings-lyrics-style">Lyrics Animation Style</label>
+                        <select id="settings-lyrics-style" class="select-dropdown" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none; font-weight: 500; cursor: pointer;">
+                            <option value="none">Static Classic (Instant Highlight)</option>
+                            <option value="fade">Soft Fade (Smooth line focus)</option>
+                            <option value="glow">Neon Glow (Accent text glow shadow)</option>
+                            <option value="slide">Vibrant Slide (Active line scale and slide)</option>
+                            <option value="apple-music">Apple Music Fluid (High Contrast Gradient tracking)</option>
+                        </select>
+                        <small style="font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-top: 4px; display: block;">Fine-tune word-by-word or line-by-line highlight transitions in lyrics panel.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="settings-show-pet" checked style="width: 18px; height: 18px; cursor: pointer;">
+                            <span>Show Floating Pet Companion</span>
+                        </label>
+                        <small style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">Keep your digital pet buddy on screen to react to your music sessions.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="settings-squiggly-slider" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span>Squiggly Slider (Wavy Progress Bar)</span>
+                        </label>
+                        <small style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">Enable an animated, wavy track for the fullscreen player's progress bar.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="settings-hide-thumbnail" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span>Hide Player Thumbnail</span>
+                        </label>
+                        <small style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">Hide the song artwork inside the player views for a cleaner layout.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings-mini-bg">Mini-Player Background Style</label>
+                        <select id="settings-mini-bg" class="select-dropdown" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none; font-weight: 500; cursor: pointer;">
+                            <option value="glass">Default Glassmorphism</option>
+                            <option value="transparent">Transparent</option>
+                            <option value="solid">Solid Accent Color</option>
+                            <option value="pureblack">OLED Pure Black</option>
+                            <option value="gradient">Dynamic Gradient</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings-buttons-style">Player Buttons Style</label>
+                        <select id="settings-buttons-style" class="select-dropdown" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none; font-weight: 500; cursor: pointer;">
+                            <option value="default">Default Minimalist</option>
+                            <option value="filled">Filled Accent Circle</option>
+                            <option value="tinted">Tinted Icons</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 16px 32px;">
+                    <button class="btn btn-secondary" id="settings-save-btn" style="width: 100%;">Close & Apply</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Pet Creator Modal -->
+        <div class="modal-overlay" id="custom-pet-modal" style="display:none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Hatch Custom Companion</h3>
+                    <button class="modal-close-btn" id="custom-pet-modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-desc">Hatch a new companion by linking a standard Codex Pet spritesheet (8 columns × 9 rows).</p>
+                    
+                    <div class="form-group">
+                        <label for="custom-pet-name-input">Companion Name</label>
+                        <input type="text" id="custom-pet-name-input" placeholder="e.g., Boba, Pikachu..." style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); box-sizing: border-box;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="custom-pet-desc-input">Description / Biography</label>
+                        <textarea id="custom-pet-desc-input" placeholder="Tell us about your pet's backstory..." style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); min-height: 60px; font-family: inherit; box-sizing: border-box; resize: vertical;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="custom-pet-personality-select">Personality Vibe</label>
+                        <select id="custom-pet-personality-select" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none; cursor: pointer;">
+                            <option value="playful">Playful (Standard Balanced)</option>
+                            <option value="cozy">Cozy (Lo-Fi Calm)</option>
+                            <option value="energetic">Energetic (Fast & Hype)</option>
+                            <option value="focused">Focused (Study Companion)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="custom-pet-genres-input">Favorite Genres (Comma separated)</label>
+                        <input type="text" id="custom-pet-genres-input" placeholder="lofi, acoustic, calm, electronic" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); box-sizing: border-box;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="custom-pet-sprite-input">Spritesheet URL</label>
+                        <input type="text" id="custom-pet-sprite-input" placeholder="e.g., https://petdex.crafter.run/api/pets/boba/sprite" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); box-sizing: border-box;">
+                        <small style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">Direct URL to a transparent 8x9 grids spritesheet png/webp image. (Supports any Petdex web companion URL!)</small>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 16px 32px; display: flex; gap: 12px;">
+                    <button class="btn btn-secondary" id="custom-pet-cancel-btn" style="flex: 1;">Cancel</button>
+                    <button class="btn btn-primary" id="custom-pet-save-btn" style="flex: 1;">Hatch Companion 🐾</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Playlist Modal -->
+        <div class="modal-overlay" id="create-playlist-modal" style="display:none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Create Playlist</h3>
+                    <button class="modal-close-btn" id="create-playlist-close-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="playlist-name-input">Name</label>
+                        <input type="text" id="playlist-name-input" placeholder="My Awesome Playlist" autocomplete="off" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); box-sizing: border-box;">
+                    </div>
+                    <div class="form-group">
+                        <label for="playlist-desc-input">Description (Optional)</label>
+                        <textarea id="playlist-desc-input" placeholder="Give your playlist a description" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--text-primary); min-height: 80px; resize: vertical; box-sizing: border-box; font-family: inherit;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 16px 32px; display: flex; gap: 12px; justify-content: flex-end;">
+                    <button class="btn btn-secondary" id="btn-cancel-create-playlist" style="flex: 1;">Cancel</button>
+                    <button class="btn btn-primary" id="btn-save-created-playlist" style="flex: 1;">Create Playlist</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add to Playlist Modal -->
+        <div class="modal-overlay" id="add-to-playlist-modal" style="display:none;">
+            <div class="modal-card" style="width: 420px;">
+                <div class="modal-header">
+                    <h3>Add to Playlist</h3>
+                    <button class="modal-close-btn" id="add-to-playlist-close-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body" style="padding: 24px; max-height: 50vh; overflow-y: auto; gap: 12px;">
+                    <div style="display: flex; flex-direction: column; gap: 8px;" id="add-to-playlists-list">
+                        <!-- User playlists will be populated here -->
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 16px 24px; display: flex; justify-content: flex-end;">
+                    <button class="btn btn-primary btn-sm" id="add-to-playlist-btn-new" style="width: 100%;">
+                        <i class="fa-solid fa-plus"></i> Create New Playlist
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Floating Pet Companion Overlay -->
+        <div class="floating-pet-overlay" id="floating-pet-container" style="display: none;">
+            <div class="pet-speech-bubble" id="pet-bubble" style="display: none;"></div>
+            <div class="pet-canvas-wrapper">
+                <canvas id="pet-canvas" width="192" height="208"></canvas>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div class="toast-notification" id="toast-notif">Credentials Saved Successfully!</div>
+
+        <!-- Hidden Audio Element -->
+        <audio id="audio-player" preload="auto" crossorigin="anonymous"></audio>
+
+        <!-- Fullscreen Wrapped Overlay -->
+        <div class="wrapped-fullscreen-overlay" id="wrapped-overlay" style="display: none;">
+            <!-- Floating Background Canvas for particles -->
+            <canvas id="wrapped-particle-canvas"></canvas>
+            <div class="wrapped-glow-bg" id="wrapped-dynamic-glow"></div>
+            
+            <div class="wrapped-top-controls">
+                <div class="wrapped-progress-ticks" id="wrapped-progress-ticks">
+                    <!-- Progress tick bars populated dynamically -->
+                </div>
+                <div class="wrapped-header-row">
+                    <span class="wrapped-meta"><i class="fa-solid fa-fire text-glow"></i> RECAP 2026</span>
+                    <button class="wrapped-close-btn" id="wrapped-close-btn-top"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            
+            <!-- Slides Container -->
+            <div class="wrapped-slides-container" id="wrapped-slides-container">
+                <!-- Slide 1: Welcome -->
+                <div class="wrapped-slide active" data-index="0">
+                    <div class="slide-content welcome-slide">
+                        <div class="welcome-visual">
+                            <i class="fa-solid fa-compact-disc pulse-icon spinning-disc"></i>
+                        </div>
+                        <span class="slide-badge">Zynic Wrapped</span>
+                        <h1>Your 2026 Year in Music</h1>
+                        <p>Let's take a journey through the soundtracks, artists, and beats that defined your year.</p>
+                        <button class="btn btn-primary btn-wrapped-start" id="wrapped-btn-begin">Begin Journey <i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Slide 2: Total Play Time -->
+                <div class="wrapped-slide" data-index="1">
+                    <div class="slide-content play-time-slide">
+                        <span class="slide-badge">Listening Time</span>
+                        <p class="slide-question">How much time did you spend together with music?</p>
+                        <h1 class="count-up-large" id="wrapped-minutes-val-display">0</h1>
+                        <span class="slide-label">MINUTES SPENT GROOVING</span>
+                        <p class="slide-context" id="wrapped-minutes-context">That's more than 94% of other listeners globally!</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 3: Unique Songs & Top Song -->
+                <div class="wrapped-slide" data-index="2">
+                    <div class="slide-content top-song-slide">
+                        <span class="slide-badge">Your Anthem</span>
+                        <p class="slide-question">One song reigned supreme this year...</p>
+                        
+                        <div class="top-song-spinning-wrapper">
+                            <div class="top-song-disc" id="wrapped-top-song-disc">
+                                <img src="" alt="Album Art" id="wrapped-top-song-art">
+                                <div class="top-song-disc-center"></div>
+                            </div>
+                            <div class="disc-glow"></div>
+                        </div>
+                        
+                        <h2 id="wrapped-top-song-title">Song Title</h2>
+                        <p id="wrapped-top-song-artist">Artist Name</p>
+                        <div class="play-count-badge">
+                            <span id="wrapped-top-song-plays">0</span> PLAYS
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 4: Top 5 Songs -->
+                <div class="wrapped-slide" data-index="3">
+                    <div class="slide-content top-5-songs-slide">
+                        <span class="slide-badge">Heavy Rotation</span>
+                        <h2>Your Top 5 Songs</h2>
+                        <div class="wrapped-list" id="wrapped-top-5-songs-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 5: Top Artist -->
+                <div class="wrapped-slide" data-index="4">
+                    <div class="slide-content top-artist-slide">
+                        <span class="slide-badge">Your Obsession</span>
+                        <p class="slide-question">Your heart belonged to one artist...</p>
+                        
+                        <div class="top-artist-badge-wrapper">
+                            <div class="top-artist-circle" id="wrapped-top-artist-circle">
+                                <i class="fa-solid fa-microphone-lines placeholder-artist"></i>
+                            </div>
+                            <div class="artist-pulse"></div>
+                        </div>
+                        
+                        <h2 id="wrapped-top-artist-name">Artist Name</h2>
+                        <p class="top-artist-subtitle">You were in their top 1% of listeners!</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 6: Top 5 Artists -->
+                <div class="wrapped-slide" data-index="5">
+                    <div class="slide-content top-5-artists-slide">
+                        <span class="slide-badge">Favorite Artists</span>
+                        <h2>Your Top 5 Artists</h2>
+                        <div class="wrapped-list" id="wrapped-top-5-artists-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 7: Conclusion Collage / Summary -->
+                <div class="wrapped-slide" data-index="6">
+                    <div class="slide-content conclusion-slide">
+                        <span class="slide-badge">Your Musical DNA</span>
+                        <h2>Your 2026 Summary</h2>
+                        
+                        <div class="wrapped-collage glass-panel" id="wrapped-summary-collage">
+                            <div class="collage-header">
+                                <i class="fa-solid fa-circle-play logo"></i>
+                                <span>Zynic 2026</span>
+                            </div>
+                            
+                            <div class="collage-body">
+                                <div class="collage-row">
+                                    <div class="collage-stat">
+                                        <span class="label">MINUTES LISTENED</span>
+                                        <span class="val" id="collage-minutes">0</span>
+                                    </div>
+                                    <div class="collage-stat">
+                                        <span class="label">TOP GENRE</span>
+                                        <span class="val" id="collage-genre">Pop-Rock</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="collage-item top-song">
+                                    <span class="label">TOP SONG</span>
+                                    <div class="collage-item-detail">
+                                        <img src="" alt="" id="collage-song-art">
+                                        <div class="text">
+                                            <span class="title" id="collage-song-title">Song Title</span>
+                                            <span class="sub" id="collage-song-artist">Artist</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="collage-item top-artist">
+                                    <span class="label">TOP ARTIST</span>
+                                    <div class="collage-item-detail">
+                                        <div class="avatar" id="collage-artist-avatar">
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                        <div class="text">
+                                            <span class="title" id="collage-artist-title">Artist Name</span>
+                                            <span class="sub">Top Fan</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="conclusion-actions">
+                            <button class="btn btn-primary" id="wrapped-btn-save-playlist"><i class="fa-solid fa-bookmark"></i> Save Wrapped Playlist</button>
+                            <button class="btn btn-outline" id="wrapped-btn-replay"><i class="fa-solid fa-rotate-right"></i> Replay</button>
+                            <button class="btn btn-secondary" id="wrapped-btn-close-end">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Side Navigation Areas (Tap Left/Right to turn page) -->
+            <div class="wrapped-nav-area left" id="wrapped-nav-left"></div>
+            <div class="wrapped-nav-area right" id="wrapped-nav-right"></div>
+        </div>
+    </div>
+
+    <!-- Profile Edit Modal -->
+    <div class="modal-overlay" id="profile-modal" style="display:none;">
+        <div class="modal-card profile-modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-circle"></i> My Profile</h3>
+                <button class="modal-close-btn" id="profile-modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <!-- Avatar picker -->
+                <div class="profile-avatar-section">
+                    <div class="profile-avatar-preview" id="profile-avatar-preview">
+                        <div class="profile-avatar-initials" id="profile-modal-initials">G</div>
+                        <img src="" id="profile-modal-avatar-img" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="avatar">
+                    </div>
+                    <div class="profile-avatar-actions">
+                        <label class="btn btn-outline btn-sm profile-upload-label" for="profile-avatar-input">
+                            <i class="fa-solid fa-upload"></i> Upload Photo
+                        </label>
+                        <input type="file" id="profile-avatar-input" accept="image/*" style="display:none;">
+                        <button class="btn btn-secondary btn-sm" id="profile-avatar-remove" style="display:none;">
+                            <i class="fa-solid fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="profile-name-input">Display Name</label>
+                    <input type="text" id="profile-name-input" placeholder="Enter your name..." maxlength="32" autocomplete="off">
+                </div>
+
+                <!-- Bio -->
+                <div class="form-group">
+                    <label for="profile-bio-input">Status / Bio</label>
+                    <input type="text" id="profile-bio-input" placeholder="What are you vibing to?" maxlength="60" autocomplete="off">
+                </div>
+
+                <button class="btn btn-primary" id="profile-save-btn" style="width:100%; margin-top:4px;">
+                    <i class="fa-solid fa-check"></i> Save Profile
+                </button>
+
+                <!-- Activity Feed -->
+                <div class="profile-activity-section">
+                    <div class="profile-activity-header">
+                        <h4><i class="fa-solid fa-chart-line"></i> Your Activity</h4>
+                        <button class="btn btn-secondary btn-sm" id="profile-activity-clear">Clear</button>
+                    </div>
+                    <div class="profile-activity-stats" id="profile-activity-stats">
+                        <!-- Filled by JS -->
+                    </div>
+                    <div class="profile-activity-feed" id="profile-activity-feed">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
