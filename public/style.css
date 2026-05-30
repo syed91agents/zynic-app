@@ -7472,3 +7472,49 @@ body.hide-player-thumbnail-active .fs-left-panel {
     font-size: 0.6rem; font-weight: 800; color: #fff;
 }
 .live-user-chip-track { opacity: 0.55; font-weight: 400; }
+
+
+/* ── Pet Den mobile fixes ───────────────────────────────── */
+@media (max-width: 768px) {
+    /* Tighten panel padding on mobile */
+    #view-pet-den .glass-panel { padding: 18px 14px !important; }
+
+    /* Den grid already 1-col at 800px; just tighten gap */
+    .den-grid-layout { gap: 16px !important; }
+
+    /* Pet picker: 2 cards per row on phones */
+    .pet-picker-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .pet-picker-card {
+        padding: 14px 10px !important;
+        border-radius: 14px !important;
+    }
+
+    .picker-sprite-wrapper {
+        width: 72px !important;
+        height: 80px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .picker-sprite-wrapper canvas {
+        width: 58px !important;
+        height: 62px !important;
+    }
+
+    .pet-picker-card h3 { font-size: 14px !important; margin-bottom: 4px !important; }
+    .pet-picker-card p  { font-size: 11px !important; }
+    .pet-picker-card button { font-size: 12px !important; padding: 8px 12px !important; }
+
+    /* Floating pet: make sure it stays within safe viewport above bottom nav */
+    #floating-pet-container {
+        bottom: 70px !important;   /* above bottom nav */
+        max-width: 100px !important;
+        touch-action: none;        /* prevent scroll fighting during drag */
+    }
+
+    /* Den pet canvas area */
+    .den-canvas-wrap canvas { width: 140px !important; height: 140px !important; }
+}

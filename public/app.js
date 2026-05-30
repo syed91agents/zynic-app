@@ -3833,57 +3833,68 @@ function setupPetDragPhysics() {
     const container = document.getElementById('floating-pet-container');
     if (!container) return;
 
+    // Prevent browser scroll/zoom from hijacking touch drags on the pet
+    container.style.touchAction = 'none';
+
     let isDragging = false;
     let startX = 0, startY = 0;
     let initialX = 0, initialY = 0;
 
-    container.addEventListener('mousedown', (e) => {
-        if (e.target.id === 'pet-bubble') return;
+    function getEventPos(e) {
+        if (e.touches && e.touches.length > 0) {
+            return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
+    }
 
+    function onDragStart(e) {
+        if (e.target.id === 'pet-bubble') return;
         isDragging = true;
         container.classList.add('dragging');
-        
-        startX = e.clientX;
-        startY = e.clientY;
-        
+        const pos = getEventPos(e);
+        startX = pos.x;
+        startY = pos.y;
         const rect = container.getBoundingClientRect();
         initialX = rect.left;
         initialY = rect.top;
-
         playPetLoop(ANIM_ROWS.RUNNING, 90);
         e.preventDefault();
-    });
+    }
 
-    document.addEventListener('mousemove', (e) => {
+    function onDragMove(e) {
         if (!isDragging) return;
-
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-
-        const x = initialX + dx;
-        const y = initialY + dy;
-
-        container.style.left = `${x}px`;
-        container.style.top = `${y}px`;
+        const pos = getEventPos(e);
+        const dx = pos.x - startX;
+        const dy = pos.y - startY;
+        const x = Math.max(0, Math.min(window.innerWidth  - container.offsetWidth,  initialX + dx));
+        const y = Math.max(0, Math.min(window.innerHeight - container.offsetHeight, initialY + dy));
+        container.style.left   = `${x}px`;
+        container.style.top    = `${y}px`;
         container.style.bottom = 'auto';
-        container.style.right = 'auto';
-
+        container.style.right  = 'auto';
         if (Math.abs(dx) > Math.abs(dy)) {
-            if (dx > 5) playPetLoop(ANIM_ROWS.RUNNING_RIGHT, 85);
+            if (dx > 5)  playPetLoop(ANIM_ROWS.RUNNING_RIGHT, 85);
             else if (dx < -5) playPetLoop(ANIM_ROWS.RUNNING_LEFT, 85);
         } else {
             if (dy < -8) playPetOnce(ANIM_ROWS.JUMPING, 100);
         }
-    });
+        if (e.cancelable) e.preventDefault();
+    }
 
-    document.addEventListener('mouseup', () => {
+    function onDragEnd() {
         if (!isDragging) return;
         isDragging = false;
         container.classList.remove('dragging');
-
         const tuning = getPetTuning(petState.selectedPetId);
         playPetLoop(tuning.rest, tuning.restDuration);
-    });
+    }
+
+    container.addEventListener('mousedown',  onDragStart);
+    container.addEventListener('touchstart', onDragStart, { passive: false });
+    document.addEventListener('mousemove',   onDragMove);
+    document.addEventListener('touchmove',   onDragMove, { passive: false });
+    document.addEventListener('mouseup',     onDragEnd);
+    document.addEventListener('touchend',    onDragEnd);
 }
 
 // Visual layout emitters
