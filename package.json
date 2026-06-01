@@ -1,0 +1,13 @@
+{
+  "name": "zynic",
+  "version": "1.0.0",
+  "description": "Zynic Music App",
+  "main": "app.py",
+  "scripts": {
+    "build": "echo 'web app'"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.2.1",
+    "@capacitor/ios": "^6.2.1"
+  }
+}

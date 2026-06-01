@@ -1324,6 +1324,21 @@ def api_health():
     return jsonify({"status": "ok", "live_users": len(LIVE_USERS)})
 
 
+@app.route('/api/petdex/manifest')
+def api_petdex_manifest():
+    url = "https://petdex.crafter.run/api/manifest"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        ctx = ssl._create_unverified_context()
+        with urllib.request.urlopen(req, context=ctx, timeout=10) as r:
+            data = r.read()
+            return Response(data, content_type="application/json",
+                            headers={"Cache-Control": "public, max-age=300"})
+    except Exception as e:
+        print(f"[petdex] manifest fetch failed: {e}")
+        return jsonify({"error": str(e)}), 502
+
+
 # ---------------------------------------------------------------------------
 # Admin dashboard
 # ---------------------------------------------------------------------------
